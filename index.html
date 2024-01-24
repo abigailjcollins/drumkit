@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound"></span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound"></span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/717685__maodin204__retro-short-fall.wav"></audio>
+  <audio data-key="83" src="sounds/711259__xiko__popup-7.wav"></audio>
+  <audio data-key="68" src="sounds/711121__xiko__retro-zoom-sound-2.wav"></audio>
+  <audio data-key="70" src="sounds/676819__eponn__swing-square-pixel-nes.wav"></audio>
+  <audio data-key="71" src="sounds/624881__sonically_sound__old-video-game-1.wav"></audio>
+  <audio data-key="72" src="sounds/516858__matrixxx__retro-drop-03.wav"></audio>
+  <audio data-key="74" src="sounds/507020__mrthenoronha__gun-shot-6-8-bit.wav"></audio>
+  <audio data-key="75" src="sounds/483510__dominikbraun__teleportation-beam-me-up.mp3"></audio>
+  <audio data-key="76" src="sounds/361002__projectsu012__forcefieldcut-chiptone.wav"></audio>
+
+  <script>
+
+    function playSound(e) {
+    
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return;
+        audio.currentTime = 0;
+        audio.play()
+        key.classList.add('playing');
+      }
+    
+
+    function removeTransition(e) {
+      if (e.propertyName !== 'transform') return;
+      this.classList.remove('playing');
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    window.addEventListener('keydown', playSound);
+
+
+  </script>
+
+
+</body>
+
+</html>
